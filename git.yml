@@ -1,0 +1,15 @@
+- hosts: workstation
+  become: yes
+  remote_user: ansible
+  become_user: root
+  tasks:
+    - name: install git
+      yum:
+        name: "{{ package }}"
+        state: present
+      vars:
+        package:
+        - git
+      register: git_debug
+    - debug:
+        msg: "Output of yum module: {{ git_debug }}"
